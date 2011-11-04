@@ -13,16 +13,26 @@ include('mobiledetect.php');
 $mymobile = new MobileDetect();
 
 if($mymobile->IsMobile() == true){
-   	add_filter('stylesheet', 'mobile_theme');
-	add_filter('template', 'mobile_theme');
+   	add_filter('stylesheet', 'mobile_stylesheet');
+	add_filter('template', 'mobile_template');
 }
   
-function mobile_theme(){
+function mobile_stylesheet(){
 	$mobiletheme =  get_option('mobiletheme');
     	$themes = get_themes();
 	foreach ($themes as $theme) {
 	  if ($theme['Name'] == $mobiletheme) {
 	      return $theme['Stylesheet'];
+	  }
+	}	
+}
+
+function mobile_template(){
+	$mobiletheme =  get_option('mobiletheme');
+    	$themes = get_themes();
+	foreach ($themes as $theme) {
+	  if ($theme['Name'] == $mobiletheme) {
+	      return $theme['Template'];
 	  }
 	}	
 }
